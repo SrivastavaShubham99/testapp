@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     backgroundColor: MaterialStateProperty.all(Colors.purple),
                   ),
-                  child: const Text("Login via OTP")
+                  child: const Text("Login")
               ),
             )
           ],

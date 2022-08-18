@@ -143,11 +143,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     enabledDayPredicate:(DateTime dateTime){
                       DateTime loopDates=DateTime.now();
-                      if(selectbookingResponse!=null){
-                        selectbookingResponse!.date!.forEach((element) {
-                          loopDates=DateTime.parse(element.date!);
-                        });
-                        return isSameDay(dateTime,loopDates);
+                      if(selectbookingResponse!=null ){
+                        if(selectbookingResponse!.date!=null){
+                          selectbookingResponse!.date!.forEach((element) {
+                            loopDates=DateTime.parse(element.date!);
+                          });
+                          return isSameDay(dateTime,loopDates);
+                        }else{
+                          return true;
+                        }
+
                       }else{
                         return true;
                       }
