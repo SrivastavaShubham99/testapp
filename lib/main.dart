@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final repo=Repository();
     SelectbookingRequest alreadyBookedSlot=SelectbookingRequest(
         month: dateTime.month.toString(),
-        year: dateTime.month.toString()
+        year: dateTime.year.toString()
     );
     final response= await repo.getBookingSlots(alreadyBookedSlot);
     if(response.isSuccess!){

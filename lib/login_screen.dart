@@ -22,72 +22,74 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.only(left: 16),
-        child: Column(
-          children:  [
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(top: 120),
-              child: const Text("Login",style: TextStyle(
-                fontSize: 30
-              )),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 120,right: 16),
-              child: TextField(
-                controller: textEditingController,
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Color(0xFFF2F2F2),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(width: 1,color: Colors.red),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(width: 1,color: Colors.orange),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(width: 1,color: Colors.grey),
-                  ),
-                  border: OutlineInputBorder(
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.only(left: 16),
+          child: Column(
+            children:  [
+              Container(
+                alignment: Alignment.centerLeft,
+                margin: EdgeInsets.only(top: 120),
+                child: const Text("Login",style: TextStyle(
+                  fontSize: 30
+                )),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 120,right: 16),
+                child: TextField(
+                  controller: textEditingController,
+                  decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Color(0xFFF2F2F2),
+                    focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
-                      borderSide: BorderSide(width: 1,)
-                  ),
-                  errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 1,color: Colors.red),
+                    ),
+                    disabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
-                      borderSide: BorderSide(width: 1,color: Colors.black)
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 1,color: Colors.orange),
+                    ),
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
-                      borderSide: BorderSide(width: 1,color: Colors.yellowAccent)
-                  ),
-                  hintText: "enter phone number",
-                  hintStyle: TextStyle(fontSize: 16,color: Color(0xFFB3B1B1)),
+                      borderSide: BorderSide(width: 1,color: Colors.grey),
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1,)
+                    ),
+                    errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1,color: Colors.black)
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderSide: BorderSide(width: 1,color: Colors.yellowAccent)
+                    ),
+                    hintText: "enter phone number",
+                    hintStyle: TextStyle(fontSize: 16,color: Color(0xFFB3B1B1)),
 
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 50,
-              margin: const EdgeInsets.only(top: 80,right: 16),
-              child: ElevatedButton(
-                  onPressed: ()=> onPostRequest(),
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(6)),
-                          )
-                      ),
-                    backgroundColor: MaterialStateProperty.all(Colors.purple),
-                  ),
-                  child: const Text("Login")
-              ),
-            )
-          ],
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                margin: const EdgeInsets.only(top: 80,right: 16),
+                child: ElevatedButton(
+                    onPressed: ()=> onPostRequest(),
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(6)),
+                            )
+                        ),
+                      backgroundColor: MaterialStateProperty.all(Colors.purple),
+                    ),
+                    child: const Text("Login")
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
