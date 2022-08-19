@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   CounterBloc? counterBloc;
   SelectbookingResponse? selectbookingResponse;
   PageController calenderController = PageController();
-
+  List<int> selectedDays=[];
   DateTime? selectedDate=DateTime.now();
   DateTime focusedDay = DateTime.now();
 
@@ -66,8 +66,11 @@ class _MyHomePageState extends State<MyHomePage> {
     final response= await repo.getBookingSlots(alreadyBookedSlot);
     if(response.isSuccess!){
       selectbookingResponse=SelectbookingResponse.fromJson(response.dataResponse);
+      selectbookingResponse!.date!.forEach((element) {
+        DateTime dateTime=DateTime.parse(element.date!);
+        selectedDays.add(dateTime.day);
+      });
       Fluttertoast.showToast(msg: selectbookingResponse!.status!.toString());
-
     }else{
       Fluttertoast.showToast(msg: "something went wrong!!");
     }
@@ -141,21 +144,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     onCalendarCreated: (controller) {
                       calenderController = controller;
                     },
-                    enabledDayPredicate:(DateTime dateTime){
-                      DateTime loopDates=DateTime.now();
-                      if(selectbookingResponse!=null ){
-                        if(selectbookingResponse!.date!=null){
-                          selectbookingResponse!.date!.forEach((element) {
-                            loopDates=DateTime.parse(element.date!);
-                          });
-                          return isSameDay(dateTime,loopDates);
-                        }else{
-                          return true;
-                        }
+                    enabledDayPredicate: (DateTime date){
 
-                      }else{
-                        return true;
-                      }
+                        print("res -> ${selectedDays.contains(date.day)}");
+                        return !selectedDays.contains(date.day);
 
                     },
                     onFormatChanged: (CalendarFormat _format) {},
@@ -163,7 +155,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     daysOfWeekVisible: true,
                     calendarBuilders: CalendarBuilders(
                       dowBuilder: (context, day) {},
-                      markerBuilder: (context, day, events) {},
+                      markerBuilder: (context, day, events) {
+                        return Container(
+                          height: 15,
+                          width: 15,
+                          color: selectedDays.contains(day) ? Colors.red : Colors.green,
+                        );
+                      },
                     ),
                     onDaySelected: (
                       DateTime selectDay,
@@ -180,9 +178,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         );
                       }
 
-                    },
-                    selectedDayPredicate: (DateTime date) {
-                      return isSameDay(DateTime.now(), date);
                     },
                     calendarStyle: const CalendarStyle(
                       isTodayHighlighted: true,

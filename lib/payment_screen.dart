@@ -32,10 +32,10 @@ class _CartState extends State<PaymentScreen> {
 
   void openCheckout() async {
     var options = {
-      'key': 'rzp_live_ILgsfZCZoFIKMb',
+      'key': 'rzp_test_tIJR06R7kQazqK',
       'amount': 100,
-      'name': 'Acme Corp.',
-      'description': 'Fine T-Shirt',
+      'name': 'TestApp.',
+      'description': 'Smart Reminder',
       'retry': {'enabled': true, 'max_count': 1},
       'send_sms_hash': true,
       'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'},
