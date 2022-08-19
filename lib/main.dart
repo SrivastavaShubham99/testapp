@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_experiment/data/request/select_booking_request.dart';
 import 'package:bloc_experiment/data/response/select_booking_response.dart';
 import 'package:bloc_experiment/login_screen.dart';
@@ -51,6 +53,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   CounterBloc? counterBloc;
+  Timer? timer;
   SelectbookingResponse? selectbookingResponse;
   PageController calenderController = PageController();
   List<int> selectedDays=[];
@@ -80,11 +83,11 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     getAlreadyBookedSlots(DateTime.now());
     super.initState();
+
   }
 
   @override
   Widget build(BuildContext context) {
-    counterBloc = BlocProvider.of<CounterBloc>(context);
     return BlocBuilder(
         bloc: counterBloc,
         builder: (BuildContext context, state) {
@@ -145,10 +148,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       calenderController = controller;
                     },
                     enabledDayPredicate: (DateTime date){
+                        print("res -> ${selectedDays}");
+                        WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+                          setState(() {
 
-                        print("res -> ${selectedDays.contains(date.day)}");
+                          });
+                        });
                         return !selectedDays.contains(date.day);
-
                     },
                     onFormatChanged: (CalendarFormat _format) {},
                     startingDayOfWeek: StartingDayOfWeek.sunday,
